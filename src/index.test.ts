@@ -25,9 +25,19 @@ test("POST /api/v1/pancakes", async () => {
 
   const postResult = await request(app)
     .post("/api/v1/pancakes")
-    .send({ layers: [] });
+    .send({ name: "chocolateCake" });
   const getResult = await request(app).get("/api/v1/pancakes");
 
   deepEqual(postResult.status, 201);
-  deepEqual(getResult.body, [{ id: "1", layers: [] }]);
+  deepEqual(getResult.body, [
+    {
+      id: "1",
+      name: "chocolateCake",
+      layers: [
+        { content: "chokladfrosting" },
+        { content: "grädde" },
+        { content: "chokladfrosting" },
+      ],
+    },
+  ]);
 });

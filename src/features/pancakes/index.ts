@@ -28,7 +28,7 @@ export function createCakesFeature(db: Db) {
         const layers = cakes[name];
         console.log(layers);
 
-        const id = v4();
+        const id = "1";
         const cake = { id, name, layers };
         await db.cookCake(cake);
         console.log(db.getAll());

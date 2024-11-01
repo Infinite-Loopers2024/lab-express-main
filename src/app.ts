@@ -4,13 +4,7 @@ import { Cake, Db } from "./features/pancakes/types";
 import { chocolateLayer, creamLayer } from "./features/pancakes/cakes";
 
 function createDb(): Db {
-  const data: Cake[] = [
-    {
-      id: "wdadwa",
-      name: "chocolateCake",
-      layers: [chocolateLayer, creamLayer, chocolateLayer],
-    },
-  ];
+  const data: Cake[] = [];
   return {
     getAll: async () => data,
     cookCake: async (cake: Cake) => {
