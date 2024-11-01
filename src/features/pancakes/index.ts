@@ -3,8 +3,6 @@ import { v4 } from "uuid";
 import { z } from "Zod";
 import { Db } from "./types";
 
-
-
 const cakeLayersSchema = z.object({
   layers: z.string().array(),
 });
@@ -30,6 +28,7 @@ export function createCakesFeature(db: Db) {
         const id = "1";
         const cake = { id, layers };
         await db.cookCake(cake);
+        console.log(db.getAll());
 
         res.status(201).json({ message: "user created" });
       });
