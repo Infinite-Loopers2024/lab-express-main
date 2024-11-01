@@ -1,5 +1,6 @@
 import express from "express";
-import { createCakesFeature, Db, Cake } from "./features";
+import { createCakesFeature } from "./features";
+import { Cake, Db } from "./features/pancakes/types";
 
 function createDb(): Db {
   const data: Cake[] = [];

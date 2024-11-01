@@ -1,20 +1,9 @@
 import express from "express";
 import { v4 } from "uuid";
 import { z } from "Zod";
+import { Db } from "./types";
 
-export type CakeLayer = {
-  content: string;
-};
 
-export type Cake = {
-  id: string;
-  layers: CakeLayer[];
-};
-
-export type Db = {
-  getAll: () => Promise<Cake[]>;
-  cookCake: (pancake: Cake) => Promise<void>;
-};
 
 const cakeLayersSchema = z.object({
   layers: z.string().array(),
