@@ -1,8 +1,8 @@
 import { Cake, CakeLayer } from "./types";
 
-const chocolateLayer: CakeLayer = { content: "chokladfrosting" };
-const creamLayer: CakeLayer = { content: "grädde" };
-const strawberryLayer: CakeLayer = { content: "jordgubbar" };
+export const chocolateLayer: CakeLayer = { content: "chokladfrosting" };
+export const creamLayer: CakeLayer = { content: "grädde" };
+export const strawberryLayer: CakeLayer = { content: "jordgubbar" };
 
 export const cakes = {
   chocolateCake: [chocolateLayer, creamLayer, chocolateLayer],

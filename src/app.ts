@@ -1,9 +1,16 @@
 import express from "express";
 import { createCakesFeature } from "./features";
 import { Cake, Db } from "./features/pancakes/types";
+import { chocolateLayer, creamLayer } from "./features/pancakes/cakes";
 
 function createDb(): Db {
-  const data: Cake[] = [];
+  const data: Cake[] = [
+    {
+      id: "wdadwa",
+      name: "chocolateCake",
+      layers: [chocolateLayer, creamLayer, chocolateLayer],
+    },
+  ];
   return {
     getAll: async () => data,
     cookCake: async (cake: Cake) => {

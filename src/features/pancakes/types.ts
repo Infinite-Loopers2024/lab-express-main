@@ -4,6 +4,7 @@ export type CakeLayer = {
 
 export type Cake = {
   id: string;
+  name: string;
   layers: CakeLayer[];
 };
 
