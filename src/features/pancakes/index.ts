@@ -1,21 +1,26 @@
 import express from "express";
 import { v4 } from "uuid";
+import { z } from "Zod";
 
-export type PancakeLayer = {
+export type CakeLayer = {
   content: string;
 };
 
-export type Pancake = {
+export type Cake = {
   id: string;
-  layers: PancakeLayer[];
+  layers: CakeLayer[];
 };
 
 export type Db = {
-  getAll: () => Promise<Pancake[]>;
-  cookPancake: (pancake: Pancake) => Promise<void>;
+  getAll: () => Promise<Cake[]>;
+  cookCake: (pancake: Cake) => Promise<void>;
 };
 
-export function createPancakesFeature(db: Db) {
+const cakeLayersSchema = z.object({
+  layers: z.string().array(),
+});
+
+export function createCakesFeature(db: Db) {
   return {
     getRouter() {
       const router = express.Router();
@@ -27,11 +32,17 @@ export function createPancakesFeature(db: Db) {
       router.post("/", async (req, res) => {
         const { layers } = req.body;
 
-        const id = "1";
-        const pankcake = { id, layers };
-        await db.cookPancake(pankcake);
+        const result = cakeLayersSchema.safeParse(req.body);
+        if (!result.success) {
+          res.status(400).json(result.error.issues);
+          return;
+        }
 
-        res.status(201).json({ id });
+        const id = "1";
+        const cake = { id, layers };
+        await db.cookCake(cake);
+
+        res.status(201).json({ message: "user created" });
       });
 
       return router;

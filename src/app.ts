@@ -1,12 +1,12 @@
 import express from "express";
-import { createPancakesFeature, Db, Pancake } from "./features";
+import { createCakesFeature, Db, Cake } from "./features";
 
 function createDb(): Db {
-  const data: Pancake[] = [];
+  const data: Cake[] = [];
   return {
     getAll: async () => data,
-    cookPancake: async (pancake: Pancake) => {
-      data.push(pancake);
+    cookCake: async (cake: Cake) => {
+      data.push(cake);
     },
   };
 }
@@ -20,9 +20,9 @@ export function createApp() {
 
   const db = createDb();
 
-  const pancakesFeature = createPancakesFeature(db);
+  const cakesFeature = createCakesFeature(db);
 
-  app.use("/api/v1/pancakes", pancakesFeature.getRouter());
+  app.use("/api/v1/pancakes", cakesFeature.getRouter());
 
   return app;
 }
