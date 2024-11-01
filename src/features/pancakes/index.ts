@@ -5,7 +5,7 @@ import { Db } from "./types";
 import { cakes } from "./cakes";
 
 const cakeLayersSchema = z.object({
-  layers: z.string().array(),
+  name: z.string(),
 });
 
 export function createCakesFeature(db: Db) {
@@ -19,12 +19,11 @@ export function createCakesFeature(db: Db) {
 
       router.post("/", async (req, res) => {
         const { name } = req.body;
-
-        // const result = cakeLayersSchema.safeParse(req.body);
-        // if (!result.success) {
-        //   res.status(400).json(result.error.issues);
-        //   return;
-        // }
+        const result = cakeLayersSchema.safeParse({ name: name });
+        if (!result.success) {
+          res.status(400).json(result.error.issues);
+          return;
+        }
 
         const layers = cakes[name];
         console.log(layers);
@@ -34,7 +33,7 @@ export function createCakesFeature(db: Db) {
         await db.cookCake(cake);
         console.log(db.getAll());
 
-        res.status(201).json({ message: "user created" });
+        res.status(201).json({ message: "cake created" });
       });
 
       return router;
